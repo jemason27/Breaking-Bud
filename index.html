@@ -132,6 +132,19 @@
   .back-link{display:inline-flex;align-items:center;gap:4px;color:var(--text-muted);font-size:13px;margin-bottom:14px;cursor:pointer;background:none;border:none;padding:0;font-family:inherit;}
 
   ::selection{background:var(--accent-soft);}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:100;opacity:0;pointer-events:none;transition:opacity .18s ease;}
+  .modal-overlay.visible{opacity:1;pointer-events:auto;}
+  .fact-card{background:var(--bg-elev);border:1px solid var(--border);border-radius:18px;padding:26px 22px;max-width:340px;width:100%;box-shadow:var(--shadow);transform:translateY(6px);transition:transform .18s ease;}
+  .modal-overlay.visible .fact-card{transform:translateY(0);}
+  .fact-icon{width:42px;height:42px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .fact-icon svg{width:22px;height:22px;}
+  .fact-headline{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:10px;}
+  .fact-category{display:inline-block;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:100px;margin-bottom:12px;}
+  .fact-text{font-size:14.5px;line-height:1.55;color:var(--text-muted);margin-bottom:20px;}
+  .fact-dismiss{width:100%;background:var(--accent);color:#151810;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;}
+  .fact-dismiss:active{opacity:0.85;}
+  .fact-saved-note{text-align:center;font-size:11.5px;color:var(--text-faint);margin-top:10px;}
 </style>
 </head>
 <body>
@@ -152,6 +165,24 @@
   </div>
 
   <div id="content"></div>
+</div>
+
+<div class="modal-overlay" id="factModal" onclick="if(event.target===this) closeFactModal()">
+  <div class="fact-card">
+    <div class="fact-icon">
+      <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="13" cy="4" r="3.6" fill="var(--accent)"/>
+        <circle cx="19" cy="9.5" r="3.6" fill="var(--accent)" opacity="0.75"/>
+        <circle cx="13" cy="15" r="3.6" fill="var(--accent)" opacity="0.55"/>
+        <circle cx="7" cy="9.5" r="3.6" fill="var(--accent)" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="fact-headline">On track</div>
+    <div class="fact-category" id="factCategory">Health</div>
+    <div class="fact-text" id="factText"></div>
+    <button class="fact-dismiss" onclick="closeFactModal()">Keep going</button>
+    <div class="fact-saved-note">Saved to today's notes</div>
+  </div>
 </div>
 
 <script>
@@ -184,6 +215,66 @@ const PHASES = [
   { phase:4, label:'Max 1 hit/week', limitType:'week',limit:1, earliest:'6:00 PM',  start:24,end:31 },
 ];
 const PHASE_COLORS = ['var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
+
+const FACTS = [
+  { category:'Health', text:"Your resting heart rate can start to normalize within days of cutting back — THC temporarily elevates it." },
+  { category:'Health', text:"Lung irritation from smoke eases within about a week of reduced use — less coughing, easier breathing." },
+  { category:'Health', text:"Taste and smell often sharpen as regular use drops off. Food starts tasting like food again." },
+  { category:'Health', text:"Sleep architecture, especially REM sleep, tends to rebound within 2-4 weeks — that's often when vivid dreams come back." },
+  { category:'Health', text:"Appetite regulation stabilizes over time, so cravings and the 'munchies' pattern fade instead of driving your eating." },
+  { category:'Health', text:"Reduced use lowers your long-term risk of cannabinoid hyperemesis syndrome, the cyclic vomiting condition tied to heavy chronic use." },
+  { category:'Health', text:"Blood pressure and circulation can improve modestly within the first few weeks of cutting back." },
+  { category:'Health', text:"Energy levels often climb once your body isn't managing a daily comedown cycle." },
+  { category:'Reproductive', text:"Sperm count and motility have been shown in research to improve within about 3 months of reduced use — roughly one full production cycle." },
+  { category:'Reproductive', text:"Testosterone regulation can normalize as cannabinoid interference with your endocrine system eases." },
+  { category:'Reproductive', text:"Research links reduced cannabis use to modestly better fertility outcomes when both partners cut back." },
+  { category:'Reproductive', text:"Menstrual cycle regularity often improves with reduced heavy use, since cannabinoids interact with reproductive hormone signaling." },
+  { category:'Reproductive', text:"Cutting back gives your reproductive system a real head start if starting a family is on the horizon." },
+  { category:'Cognitive', text:"Verbal memory and recall often measurably improve within the first few weeks of reduced use." },
+  { category:'Cognitive', text:"Sustained attention and focus typically sharpen within 1-4 weeks — useful heading into demanding calls." },
+  { category:'Cognitive', text:"Reaction time and processing speed tend to improve as regular use tapers off." },
+  { category:'Cognitive', text:"Motivation and follow-through often rebound — the 'amotivational' effect of heavy chronic use is reversible." },
+  { category:'Cognitive', text:"Working memory, holding several things in mind at once, is one of the first functions to bounce back." },
+  { category:'Cognitive', text:"Verbal fluency — finding the right word quickly — often improves within the first month." },
+  { category:'Cognitive', text:"Memory consolidation works better without regular THC interference, especially the kind that happens during sleep." },
+  { category:'Cognitive', text:"Executive function — planning, prioritizing, decision-making — is one of the areas most consistently shown to improve with reduced use." },
+  { category:'Social', text:"Being fully present in conversations, not managing a high or a comedown, is something people around you tend to notice." },
+  { category:'Social', text:"More predictable mood and energy makes you easier to make plans with and easier to be around under stress." },
+  { category:'Social', text:"Irritability from the initial adjustment window usually eases within 1-2 weeks, often improving day-to-day patience." },
+  { category:'Social', text:"You free up mental bandwidth that used to go toward managing use — more of it goes toward the people in your life." },
+  { category:'Social', text:"Being reliably present, not tied to a using schedule, makes you more available for the moments that matter." },
+  { category:'Social', text:"Cutting back often sharpens emotional attunement in close relationships — easier to read the room, easier to connect." },
+  { category:'Momentum', text:"Every hit you don't take is money and time that stays yours." },
+  { category:'Momentum', text:"Sharper mornings compound — reaction time and alertness on calls add up over a month." },
+  { category:'Momentum', text:"You're building real evidence you can trust yourself to follow through. That's worth more than any single day's numbers." },
+  { category:'Momentum', text:"Fewer disruptions to your sleep cycle means better recovery from lifting and better performance in the gym." },
+  { category:'Momentum', text:"This exact moment, staying under the limit, is the compounding interest of the whole plan." },
+  { category:'Momentum', text:"You're proving the plan works in real time. That's the whole game." }
+];
+let lastFactText = null;
+function pickFact(){
+  let f;
+  do { f = FACTS[Math.floor(Math.random()*FACTS.length)]; }
+  while(FACTS.length > 1 && f.text === lastFactText);
+  lastFactText = f.text;
+  return f;
+}
+function showFactPopup(fact){
+  document.getElementById('factCategory').textContent = fact.category;
+  document.getElementById('factText').textContent = fact.text;
+  document.getElementById('factModal').classList.add('visible');
+}
+window.closeFactModal = function(){
+  document.getElementById('factModal').classList.remove('visible');
+};
+async function appendFactNote(entry_date, fact){
+  const row = rows[entry_date] || {};
+  const stamp = new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  const line = `${stamp} — ${fact.text}`;
+  const existing = row.notes || '';
+  const notes = existing ? existing + '\n' + line : line;
+  await patchRow(entry_date, { notes });
+}
 PHASES.forEach((p,i) => { p.earliestMinutes = parseEarliestMinutes(p.earliest); p.length = p.end - p.start + 1; p.color = PHASE_COLORS[i]; });
 
 const PLAN_START = new Date(2026,6,1);
@@ -427,6 +518,14 @@ window.logHit = async function(entry_date){
   const row = rows[entry_date] || { hits: [] };
   const hits = (row.hits || []).concat([new Date().toISOString()]);
   await patchRow(entry_date, { hits, completed:true });
+
+  const schedule = simulatePlan(rows);
+  const entry = schedule.byDate[entry_date];
+  if(entry && entry.issues && entry.issues.compliant){
+    const fact = pickFact();
+    await appendFactNote(entry_date, fact);
+    showFactPopup(fact);
+  }
   refreshCurrentView();
 };
 
