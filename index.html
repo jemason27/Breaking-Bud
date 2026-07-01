@@ -9,55 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1a1d18;
-    --bg-elev:#22261f;
-    --bg-elev-2:#2a2f26;
-    --text:#eeeee6;
-    --text-muted:#9aa08c;
-    --text-faint:#5f6558;
+    --bg:#1a1d18; --bg-elev:#22261f; --bg-elev-2:#2a2f26;
+    --text:#eeeee6; --text-muted:#9aa08c; --text-faint:#5f6558;
     --border:#343a2c;
-    --accent:#94ab77;
-    --accent-soft:rgba(148,171,119,0.14);
-    --warn:#c99552;
-    --warn-soft:rgba(201,149,82,0.14);
-    --danger:#c06b4f;
-    --danger-soft:rgba(192,107,79,0.14);
-    --p1:#94ab77;
-    --p2:#a8a866;
-    --p3:#c99552;
-    --p4:#c06b4f;
+    --accent:#94ab77; --accent-soft:rgba(148,171,119,0.14);
+    --warn:#c99552; --warn-soft:rgba(201,149,82,0.14);
+    --danger:#c06b4f; --danger-soft:rgba(192,107,79,0.14);
+    --p1:#94ab77; --p2:#a8a866; --p3:#c99552; --p4:#c06b4f;
     --radius:14px;
     --shadow:0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
   }
   body.light{
-    --bg:#f6f5ee;
-    --bg-elev:#ffffff;
-    --bg-elev-2:#eeede2;
-    --text:#26291f;
-    --text-muted:#6b7160;
-    --text-faint:#a3a794;
+    --bg:#f6f5ee; --bg-elev:#ffffff; --bg-elev-2:#eeede2;
+    --text:#26291f; --text-muted:#6b7160; --text-faint:#a3a794;
     --border:#e0ded0;
-    --accent:#5f7a45;
-    --accent-soft:rgba(95,122,69,0.10);
-    --warn:#a06a2a;
-    --warn-soft:rgba(160,106,42,0.10);
-    --danger:#a1492f;
-    --danger-soft:rgba(161,73,47,0.10);
-    --p1:#5f7a45;
-    --p2:#8a7f2e;
-    --p3:#a06a2a;
-    --p4:#a1492f;
+    --accent:#5f7a45; --accent-soft:rgba(95,122,69,0.10);
+    --warn:#a06a2a; --warn-soft:rgba(160,106,42,0.10);
+    --danger:#a1492f; --danger-soft:rgba(161,73,47,0.10);
+    --p1:#5f7a45; --p2:#8a7f2e; --p3:#a06a2a; --p4:#a1492f;
     --shadow:0 1px 2px rgba(0,0,0,0.06), 0 8px 20px rgba(0,0,0,0.06);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    min-height:100vh;
-    transition:background .2s ease, color .2s ease;
-  }
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;transition:background .2s ease, color .2s ease;}
   .display{font-family:'Fraunces',serif;}
   .mono{font-family:'IBM Plex Mono',monospace;}
   .wrap{max-width:520px;margin:0 auto;padding:20px 18px 100px;}
@@ -80,7 +54,9 @@
   .day-title{font-size:28px;font-weight:600;margin:0 0 2px;}
   .day-sub{color:var(--text-muted);font-size:14px;margin-bottom:16px;}
 
-  .phase-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:100px;margin-bottom:16px;}
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .phase-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:100px;}
+  .attempt-badge{display:inline-flex;align-items:center;font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:100px;background:var(--bg-elev-2);color:var(--text-muted);}
   .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
   .limit-row{display:flex;gap:10px;margin-bottom:18px;}
@@ -111,8 +87,8 @@
 
   .stats{display:flex;gap:10px;margin-bottom:16px;}
   .stat{flex:1;background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;}
-  .stat .num{font-size:24px;font-weight:600;font-family:'IBM Plex Mono',monospace;}
-  .stat .lbl{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
+  .stat .num{font-size:22px;font-weight:600;font-family:'IBM Plex Mono',monospace;}
+  .stat .lbl{font-size:10.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
 
   .phase-legend{display:flex;flex-direction:column;gap:8px;margin-bottom:6px;}
   .phase-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;font-size:13px;}
@@ -121,24 +97,27 @@
   .phase-row .pname{font-weight:600;flex:1;}
   .phase-row .prange{color:var(--text-faint);font-size:12px;}
 
+  .month-label{font-size:13px;font-weight:600;color:var(--text-muted);margin:14px 0 8px;}
+  .month-label:first-child{margin-top:0;}
   .weekday-row{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:8px;}
   .weekday-row span{text-align:center;font-size:11px;color:var(--text-faint);text-transform:uppercase;}
   .month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
   .day-cell{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:'IBM Plex Mono',monospace;color:var(--text-muted);}
   .day-cell.empty{visibility:hidden;cursor:default;}
-  .day-cell.future{background:var(--bg-elev-2);}
+  .day-cell.notyet{background:var(--bg-elev-2);opacity:0.4;cursor:default;}
+  .day-cell.pending{background:var(--warn-soft);color:var(--warn);}
   .day-cell.ok{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);}
   .day-cell.over{background:var(--danger-soft);color:var(--danger);border-color:var(--danger);}
-  .day-cell.pending{background:var(--warn-soft);color:var(--warn);}
   .day-cell.today{box-shadow:0 0 0 2px var(--text) inset;}
 
   .history-row{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;}
   .history-row:last-child{border-bottom:none;}
-  .history-top{display:flex;align-items:center;justify-content:space-between;}
+  .history-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
   .history-date{font-weight:600;font-size:14.5px;}
+  .history-tags{display:flex;gap:6px;flex-shrink:0;}
   .history-times{color:var(--text-muted);font-size:12.5px;font-family:'IBM Plex Mono',monospace;}
   .history-notes{color:var(--text-muted);font-size:12.5px;font-style:italic;}
-  .badge-sm{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:100px;}
+  .badge-sm{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:100px;white-space:nowrap;}
   .badge-sm.ok{background:var(--accent-soft);color:var(--accent);}
   .badge-sm.over{background:var(--danger-soft);color:var(--danger);}
 
@@ -194,44 +173,29 @@ function parseEarliestMinutes(str){
 }
 
 const PHASES = [
-  { phase:1, label:'Max 3 hits/day', limitType:'day', limit:3, earliest:'12:00 PM', start:1, end:8,  color:'var(--p1)' },
-  { phase:2, label:'Max 2 hits/day', limitType:'day', limit:2, earliest:'2:00 PM',  start:9, end:15, color:'var(--p2)' },
-  { phase:3, label:'Max 1 hit/day',  limitType:'day', limit:1, earliest:'4:00 PM',  start:16,end:23, color:'var(--p3)' },
-  { phase:4, label:'Max 1 hit/week', limitType:'week',limit:1, earliest:'6:00 PM',  start:24,end:31, color:'var(--p4)' },
+  { phase:1, label:'Max 3 hits/day', limitType:'day', limit:3, earliest:'12:00 PM', start:1, end:8 },
+  { phase:2, label:'Max 2 hits/day', limitType:'day', limit:2, earliest:'2:00 PM',  start:9, end:15 },
+  { phase:3, label:'Max 1 hit/day',  limitType:'day', limit:1, earliest:'4:00 PM',  start:16,end:23 },
+  { phase:4, label:'Max 1 hit/week', limitType:'week',limit:1, earliest:'6:00 PM',  start:24,end:31 },
 ];
-PHASES.forEach(p => p.earliestMinutes = parseEarliestMinutes(p.earliest));
+const PHASE_COLORS = ['var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
+PHASES.forEach((p,i) => { p.earliestMinutes = parseEarliestMinutes(p.earliest); p.length = p.end - p.start + 1; p.color = PHASE_COLORS[i]; });
+
+const PLAN_START = new Date(2026,6,1);
 
 function pad(n){ return n<10 ? '0'+n : ''+n; }
 function toDateStr(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
-function phaseForDay(dayNum){ return PHASES.find(p => dayNum >= p.start && dayNum <= p.end); }
+function fromDateStr(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y,m-1,d); }
+function addDays(dateStr, n){ const d = fromDateStr(dateStr); d.setDate(d.getDate()+n); return toDateStr(d); }
 function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}); }
 function minutesOfLocal(iso){ const d = new Date(iso); return d.getHours()*60 + d.getMinutes(); }
-
-function buildPlan(){
-  const plan = [];
-  const start = new Date(2026,6,1);
-  for(let i=0;i<31;i++){
-    const d = new Date(start); d.setDate(start.getDate()+i);
-    const dayNum = i+1;
-    const ph = phaseForDay(dayNum);
-    plan.push({
-      entry_date: toDateStr(d),
-      day_number: dayNum,
-      phase: ph.phase,
-      phase_label: ph.label,
-      daily_limit: ph.limit,
-      earliest_time: ph.earliest,
-      dateObj: d
-    });
-  }
-  return plan;
-}
-const PLAN = buildPlan();
-const PLAN_BY_DATE = Object.fromEntries(PLAN.map(p => [p.entry_date, p]));
+function fmtDateLong(dateStr){ return fromDateStr(dateStr).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}); }
+function fmtDateShort(dateStr){ return fromDateStr(dateStr).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}); }
 
 let rows = {};
 let activeTab = 'today';
 let dayViewDate = null;
+let dayViewBackTab = 'month';
 
 async function fetchAll(){
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}?select=*&order=entry_date.asc`, { headers: sbHeaders() });
@@ -239,27 +203,29 @@ async function fetchAll(){
   return res.json();
 }
 
-async function seedMissing(existing){
-  const have = new Set(existing.map(r => r.entry_date));
-  const missing = PLAN.filter(p => !have.has(p.entry_date)).map(p => ({
-    entry_date: p.entry_date,
-    day_number: p.day_number,
-    phase: p.phase,
-    phase_label: p.phase_label,
-    daily_limit: p.daily_limit,
-    earliest_time: p.earliest_time,
+async function ensureRow(entry_date, entry){
+  if(rows[entry_date]) return rows[entry_date];
+  const payload = {
+    entry_date,
+    day_number: entry.dayNumber,
+    phase: entry.phaseObj.phase,
+    phase_label: entry.phaseObj.label,
+    daily_limit: entry.phaseObj.limit,
+    earliest_time: entry.phaseObj.earliest,
     completed: false,
     actual_amount: null,
     hits: [],
     notes: null
-  }));
-  if(missing.length === 0) return;
+  };
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE}?on_conflict=entry_date`, {
     method:'POST',
     headers: sbHeaders({ 'Prefer':'resolution=merge-duplicates,return=representation' }),
-    body: JSON.stringify(missing)
+    body: JSON.stringify([payload])
   });
   if(!res.ok) throw new Error('seed failed: '+res.status);
+  const data = await res.json();
+  rows[entry_date] = data[0];
+  return rows[entry_date];
 }
 
 async function patchRow(entry_date, patch){
@@ -274,114 +240,157 @@ async function patchRow(entry_date, patch){
   return rows[entry_date];
 }
 
-function dayIssues(row, planDay){
-  if(!row || !row.completed) return null;
+function computeIssues(row, ph, rowsMap, attemptStart, dateStr){
   const hits = row.hits || [];
-  const ph = phaseForDay(planDay.day_number);
-  let count = hits.length;
   let overLimit;
   if(ph.limitType === 'week'){
-    const windowStart = Math.max(ph.start, planDay.day_number - 6);
+    const windowStartCandidate = addDays(dateStr, -6);
+    const windowStart = windowStartCandidate > attemptStart ? windowStartCandidate : attemptStart;
     let sum = 0;
-    for(let d=windowStart; d<=planDay.day_number; d++){
-      const dt = PLAN[d-1];
-      const r = rows[dt.entry_date];
+    let d = windowStart;
+    while(d <= dateStr){
+      const r = rowsMap[d];
       if(r && r.completed) sum += (r.hits ? r.hits.length : 0);
+      d = addDays(d, 1);
     }
     overLimit = sum > ph.limit;
   } else {
-    overLimit = count > ph.limit;
+    overLimit = hits.length > ph.limit;
   }
   const early = hits.some(t => minutesOfLocal(t) < ph.earliestMinutes);
   return { overLimit, early, compliant: !overLimit && !early };
 }
 
-function computeStreaks(){
+// Walks day by day from the plan start. A slip (over limit or before the earliest-time
+// gate) resets progress to day 1 of the CURRENT phase only — it does not touch earlier
+// phases or delete any history. Every completed day stays in rowsMap/History forever.
+function simulatePlan(rowsMap){
+  let cursor = toDateStr(PLAN_START);
+  let phaseIdx = 0;
+  let dayInPhase = 1;
+  let dayNumber = 1;
+  let attemptStart = cursor;
+  const phaseAttempts = [1,1,1,1];
+  const byDate = {};
+  const order = [];
+  let totalSlips = 0;
+  let currentDate = null;
+  let planComplete = false;
+
+  for(let iter=0; iter<200; iter++){
+    if(phaseIdx >= PHASES.length){ planComplete = true; break; }
+    const dateStr = cursor;
+    const ph = PHASES[phaseIdx];
+    const entry = {
+      dateStr, dayNumber, phaseIdx,
+      phaseObj: ph, dayInPhase,
+      phaseLength: ph.length,
+      attempt: phaseAttempts[phaseIdx]
+    };
+    byDate[dateStr] = entry;
+    order.push(dateStr);
+
+    const row = rowsMap[dateStr];
+    if(row && row.completed){
+      const issues = computeIssues(row, ph, rowsMap, attemptStart, dateStr);
+      entry.issues = issues;
+      entry.isSlip = !issues.compliant;
+      const nextDate = addDays(dateStr, 1);
+      if(issues.compliant){
+        dayInPhase++;
+        dayNumber++;
+        cursor = nextDate;
+        if(dayInPhase > ph.length){
+          phaseIdx++; dayInPhase = 1; attemptStart = nextDate;
+          if(phaseIdx < PHASES.length) phaseAttempts[phaseIdx] = 1;
+        }
+      } else {
+        totalSlips++;
+        dayInPhase = 1;
+        dayNumber++;
+        cursor = nextDate;
+        attemptStart = nextDate;
+        phaseAttempts[phaseIdx] += 1;
+      }
+    } else {
+      entry.pending = true;
+      currentDate = dateStr;
+      break;
+    }
+  }
+  return { byDate, order, planComplete, currentDate, totalSlips, phaseAttempts };
+}
+
+function computeStreaks(schedule){
   let best = 0, run = 0;
-  for(let i=0;i<PLAN.length;i++){
-    const p = PLAN[i];
-    const row = rows[p.entry_date];
-    const issues = dayIssues(row, p);
-    if(issues === null) continue;
-    if(issues.compliant){ run++; best = Math.max(best, run); }
-    else { run = 0; }
-  }
-  let i = PLAN.length - 1;
-  while(i >= 0){
-    const row = rows[PLAN[i].entry_date];
-    if(row && row.completed) break;
-    i--;
-  }
+  schedule.order.forEach(d => {
+    const e = schedule.byDate[d];
+    if(e.pending) return;
+    if(!e.isSlip){ run++; best = Math.max(best, run); } else run = 0;
+  });
   let current = 0;
-  while(i >= 0){
-    const row = rows[PLAN[i].entry_date];
-    const issues = dayIssues(row, PLAN[i]);
-    if(issues && issues.compliant){ current++; i--; } else break;
+  for(let i = schedule.order.length - 1; i >= 0; i--){
+    const e = schedule.byDate[schedule.order[i]];
+    if(e.pending) continue;
+    if(!e.isSlip) current++; else break;
   }
   return { current, best };
 }
 
 function leafSVG(phaseNum){
-  const cols = ['var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
   let paths = '';
   const positions = [[13,4],[20,10],[13,17],[6,10]];
   for(let i=0;i<4;i++){
     const filled = i < phaseNum;
     const [x,y] = positions[i];
-    paths += `<circle cx="${x}" cy="${y}" r="4.2" fill="${filled?cols[i]:'none'}" stroke="${cols[i]}" stroke-width="1.4" opacity="${filled?1:0.35}"/>`;
+    paths += `<circle cx="${x}" cy="${y}" r="4.2" fill="${filled?PHASE_COLORS[i]:'none'}" stroke="${PHASE_COLORS[i]}" stroke-width="1.4" opacity="${filled?1:0.35}"/>`;
   }
   return `<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">${paths}</svg>`;
 }
 
-function todayInfo(){
-  const now = new Date();
-  const todayStr = toDateStr(now);
-  if(todayStr < PLAN[0].entry_date) return { state:'before', planDay: PLAN[0] };
-  if(todayStr > PLAN[PLAN.length-1].entry_date) return { state:'after' };
-  return { state:'active', planDay: PLAN_BY_DATE[todayStr] };
-}
-
-function renderHitList(planDay){
-  const row = rows[planDay.entry_date] || {};
+function renderHitList(entry){
+  const row = rows[entry.dateStr] || {};
   const hits = row.hits || [];
-  const ph = phaseForDay(planDay.day_number);
+  const ph = entry.phaseObj;
   if(hits.length === 0) return `<div class="no-hits">No hits logged yet</div>`;
   return `<div class="hit-list">${hits.map((t,idx) => {
     const early = minutesOfLocal(t) < ph.earliestMinutes;
     return `
       <div class="hit-row">
         <span><span class="hit-time">${fmtTime(t)}</span>${early ? '<span class="hit-early">before earliest</span>' : ''}</span>
-        <button class="hit-del" onclick="deleteHit('${planDay.entry_date}', ${idx})">&times;</button>
+        <button class="hit-del" onclick="deleteHit('${entry.dateStr}', ${idx})">&times;</button>
       </div>
     `;
   }).join('')}</div>`;
 }
 
-function renderDayCard(planDay, opts){
+function renderDayCard(entry, opts){
   opts = opts || {};
-  const row = rows[planDay.entry_date] || {};
-  const ph = phaseForDay(planDay.day_number);
-  const issues = dayIssues(row, planDay);
-  const dateLabel = planDay.dateObj.toLocaleDateString('en-US',{ weekday:'long', month:'long', day:'numeric' });
+  const row = rows[entry.dateStr] || {};
+  const ph = entry.phaseObj;
+  const issues = entry.issues || null;
   const hits = row.hits || [];
 
   let statusHtml = '';
   if(issues !== null){
     if(issues.compliant) statusHtml = `<div class="status-strip ok">Within limit and on schedule</div>`;
-    else if(issues.overLimit && issues.early) statusHtml = `<div class="status-strip over">Over limit and logged before earliest time</div>`;
-    else if(issues.overLimit) statusHtml = `<div class="status-strip over">Over limit for this phase</div>`;
-    else statusHtml = `<div class="status-strip over">Logged before earliest time</div>`;
+    else if(issues.overLimit && issues.early) statusHtml = `<div class="status-strip over">Over limit and before earliest time — phase restarts tomorrow</div>`;
+    else if(issues.overLimit) statusHtml = `<div class="status-strip over">Over limit — phase restarts tomorrow</div>`;
+    else statusHtml = `<div class="status-strip over">Before earliest time — phase restarts tomorrow</div>`;
   }
 
   return `
     <div class="card">
       ${opts.showBack ? `<button class="back-link" onclick="goTab('${opts.backTab || 'month'}')">← Back</button>` : ''}
-      <div class="eyebrow">Day ${planDay.day_number} of 31</div>
-      <h2 class="day-title display">${dateLabel}</h2>
+      <div class="eyebrow">Day ${entry.dayNumber} · Phase ${ph.phase}, day ${entry.dayInPhase} of ${entry.phaseLength}</div>
+      <h2 class="day-title display">${fmtDateLong(entry.dateStr)}</h2>
       <div class="day-sub">${row.completed ? 'Logged' : (hits.length ? 'In progress' : 'Not logged yet')}</div>
 
-      <div class="phase-badge" style="background:color-mix(in srgb, ${ph.color} 16%, transparent); color:${ph.color};">
-        <span class="dot" style="background:${ph.color}"></span> Phase ${ph.phase}
+      <div class="badge-row">
+        <div class="phase-badge" style="background:color-mix(in srgb, ${ph.color} 16%, transparent); color:${ph.color};">
+          <span class="dot" style="background:${ph.color}"></span> Phase ${ph.phase}
+        </div>
+        ${entry.attempt > 1 ? `<div class="attempt-badge">Attempt ${entry.attempt}</div>` : ''}
       </div>
 
       <div class="limit-row">
@@ -395,14 +404,14 @@ function renderDayCard(planDay, opts){
         </div>
       </div>
 
-      <button class="log-btn" onclick="logHit('${planDay.entry_date}')">Log a hit now</button>
+      <button class="log-btn" onclick="logHit('${entry.dateStr}')">Log a hit now</button>
 
-      <div id="hits-${planDay.entry_date}">${renderHitList(planDay)}</div>
+      <div id="hits-${entry.dateStr}">${renderHitList(entry)}</div>
 
-      ${hits.length === 0 && !row.completed ? `<button class="zero-btn" onclick="markZero('${planDay.entry_date}')">No hits today — mark day reviewed</button>` : ''}
+      ${hits.length === 0 && !row.completed ? `<button class="zero-btn" onclick="markZero('${entry.dateStr}')">No hits today — mark day reviewed</button>` : ''}
 
-      <textarea id="notes-${planDay.entry_date}" placeholder="Notes — cravings, mood, what helped...">${row.notes || ''}</textarea>
-      <button class="notes-save" id="notesbtn-${planDay.entry_date}" onclick="saveNotes('${planDay.entry_date}')">Save notes</button>
+      <textarea id="notes-${entry.dateStr}" placeholder="Notes — cravings, mood, what helped...">${row.notes || ''}</textarea>
+      <button class="notes-save" id="notesbtn-${entry.dateStr}" onclick="saveNotes('${entry.dateStr}')">Save notes</button>
 
       ${statusHtml}
     </div>
@@ -447,64 +456,66 @@ function refreshCurrentView(){
   if(activeTab === 'today') renderToday();
   else if(activeTab === 'month') renderMonth();
   else if(activeTab === 'history') renderHistory();
-  else if(activeTab === 'day') renderDayView(dayViewDate);
+  else if(activeTab === 'day') openDay(dayViewDate, dayViewBackTab);
+  else if(activeTab === 'plan') renderPlan();
 }
 
-function renderStats(s){
+function renderStats(s, schedule){
   return `
     <div class="stats">
       <div class="stat"><div class="num">${s.current}</div><div class="lbl">Current streak</div></div>
       <div class="stat"><div class="num">${s.best}</div><div class="lbl">Best streak</div></div>
+      <div class="stat"><div class="num">${schedule.totalSlips}</div><div class="lbl">Total slips</div></div>
     </div>
   `;
 }
 
-function renderToday(){
-  const info = todayInfo();
+async function renderToday(){
   const content = document.getElementById('content');
-  if(info.state === 'before'){
-    const daysUntil = Math.round((PLAN[0].dateObj - new Date(new Date().toDateString())) / 86400000);
+  const today = toDateStr(new Date());
+  if(today < toDateStr(PLAN_START)){
+    const daysUntil = Math.round((PLAN_START - new Date(new Date().toDateString())) / 86400000);
     content.innerHTML = `
       <div class="card empty-state">
         <div class="display">Taper starts July 1</div>
-        <div>${daysUntil} day${daysUntil===1?'':'s'} to go. Take a look at the plan below.</div>
+        <div>${daysUntil} day${daysUntil===1?'':'s'} to go.</div>
       </div>
     `;
     return;
   }
-  if(info.state === 'after'){
-    const s = computeStreaks();
-    const loggedDays = PLAN.filter(p => rows[p.entry_date] && rows[p.entry_date].completed);
-    const compliantDays = loggedDays.filter(p => { const iss = dayIssues(rows[p.entry_date], p); return iss && iss.compliant; });
+  const schedule = simulatePlan(rows);
+  if(schedule.planComplete){
+    const s = computeStreaks(schedule);
     content.innerHTML = `
       <div class="card empty-state">
         <div class="display">Plan complete</div>
-        <div>You logged ${loggedDays.length} of 31 days, ${compliantDays.length} fully on-plan.</div>
+        <div>All 4 phases done, ${schedule.totalSlips} total slip${schedule.totalSlips===1?'':'s'} along the way.</div>
       </div>
-      ${renderStats(s)}
+      ${renderStats(s, schedule)}
     `;
     return;
   }
-  const s = computeStreaks();
-  content.innerHTML = renderStats(s) + renderDayCard(info.planDay);
+  const entry = schedule.byDate[schedule.currentDate];
+  await ensureRow(entry.dateStr, entry);
+  const s = computeStreaks(schedule);
+  content.innerHTML = renderStats(s, schedule) + renderDayCard(entry);
 }
 
-function renderPhaseLegend(){
-  const now = toDateStr(new Date());
-  const currentPh = (now >= PLAN[0].entry_date && now <= PLAN[PLAN.length-1].entry_date) ? phaseForDay(PLAN_BY_DATE[now].day_number) : null;
+function renderPhaseLegend(schedule){
+  let currentEntry = null;
+  if(!schedule.planComplete) currentEntry = schedule.byDate[schedule.currentDate];
   return `
     <div class="card">
-      <div class="eyebrow">31-day plan</div>
+      <div class="eyebrow">4-phase plan</div>
       <div class="phase-legend">
         ${PHASES.map(p => {
-          const startDate = PLAN[p.start-1].dateObj.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-          const endDate = PLAN[p.end-1].dateObj.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-          const isCurrent = currentPh && currentPh.phase === p.phase;
+          const isCurrent = currentEntry && currentEntry.phaseObj.phase === p.phase;
+          const attempt = currentEntry && isCurrent ? currentEntry.attempt : (schedule.phaseAttempts[p.phase-1] || 1);
           return `
             <div class="phase-row ${isCurrent?'current':''}">
               <span class="dot" style="background:${p.color}"></span>
               <span class="pname">${p.label}</span>
-              <span class="prange">${startDate}–${endDate} · from ${p.earliest}</span>
+              <span class="prange">${p.length} days · from ${p.earliest}${attempt>1?' · attempt '+attempt:''}</span>
             </div>
           `;
         }).join('')}
@@ -513,49 +524,77 @@ function renderPhaseLegend(){
   `;
 }
 
+function renderPlan(){
+  const schedule = simulatePlan(rows);
+  const s = computeStreaks(schedule);
+  document.getElementById('content').innerHTML = renderStats(s, schedule) + renderPhaseLegend(schedule);
+}
+
 function renderMonth(){
   const content = document.getElementById('content');
-  const firstWeekday = PLAN[0].dateObj.getDay();
-  const todayStr = toDateStr(new Date());
-  let cells = '';
-  for(let i=0;i<firstWeekday;i++) cells += `<div class="day-cell empty"></div>`;
-  PLAN.forEach(p => {
-    const row = rows[p.entry_date];
-    const issues = dayIssues(row, p);
-    let cls = 'future';
-    if(issues !== null) cls = issues.compliant ? 'ok' : 'over';
-    else if(p.entry_date < todayStr) cls = 'pending';
-    if(p.entry_date === todayStr) cls += ' today';
-    cells += `<div class="day-cell ${cls}" onclick="openDay('${p.entry_date}','month')">${p.day_number}</div>`;
+  const schedule = simulatePlan(rows);
+  const lastDate = schedule.order.length ? schedule.order[schedule.order.length-1] : toDateStr(PLAN_START);
+  const rangeEnd = addDays(lastDate, 7);
+
+  const months = {};
+  let cursor = toDateStr(PLAN_START);
+  while(cursor <= rangeEnd){
+    const d = fromDateStr(cursor);
+    const key = d.getFullYear()+'-'+pad(d.getMonth()+1);
+    if(!months[key]) months[key] = { label: d.toLocaleDateString('en-US',{month:'long',year:'numeric'}), year:d.getFullYear(), month:d.getMonth(), days: [] };
+    months[key].days.push(cursor);
+    cursor = addDays(cursor, 1);
+  }
+
+  const today = toDateStr(new Date());
+  let html = '<div class="card">';
+  Object.values(months).forEach(mo => {
+    html += `<div class="month-label">${mo.label}</div>`;
+    html += `<div class="weekday-row"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>`;
+    const firstOfMonth = new Date(mo.year, mo.month, 1);
+    const leadingBlanks = firstOfMonth.getDay();
+    let cells = '';
+    for(let i=0;i<leadingBlanks;i++) cells += `<div class="day-cell empty"></div>`;
+    mo.days.forEach(dateStr => {
+      const entry = schedule.byDate[dateStr];
+      let cls, label, clickable = false;
+      if(!entry){
+        cls = 'notyet'; label = fromDateStr(dateStr).getDate();
+      } else if(entry.pending){
+        cls = 'pending'; label = entry.dayInPhase; clickable = true;
+      } else {
+        cls = entry.issues.compliant ? 'ok' : 'over';
+        label = entry.dayInPhase; clickable = true;
+      }
+      if(dateStr === today) cls += ' today';
+      cells += `<div class="day-cell ${cls}" ${clickable ? `onclick="openDay('${dateStr}','month')"` : ''}>${label}</div>`;
+    });
+    html += `<div class="month-grid">${cells}</div>`;
   });
-  content.innerHTML = `
-    <div class="card">
-      <div class="weekday-row">
-        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-      </div>
-      <div class="month-grid">${cells}</div>
-    </div>
-  `;
+  html += '</div>';
+  content.innerHTML = html;
 }
 
 function renderHistory(){
   const content = document.getElementById('content');
-  const logged = PLAN.filter(p => rows[p.entry_date] && rows[p.entry_date].completed).slice().reverse();
+  const schedule = simulatePlan(rows);
+  const logged = schedule.order.filter(d => !schedule.byDate[d].pending).slice().reverse();
   if(logged.length === 0){
-    content.innerHTML = `<div class="card empty-state"><div class="display">Nothing logged yet</div><div>Once you log a day it'll show up here.</div></div>`;
+    content.innerHTML = `<div class="card empty-state"><div class="display">Nothing logged yet</div><div>Once you log a day it'll show up here — and it stays here even after a slip.</div></div>`;
     return;
   }
-  const rowsHtml = logged.map(p => {
-    const row = rows[p.entry_date];
-    const issues = dayIssues(row, p);
+  const rowsHtml = logged.map(d => {
+    const entry = schedule.byDate[d];
+    const row = rows[d];
     const hits = row.hits || [];
-    const dateLabel = p.dateObj.toLocaleDateString('en-US',{ weekday:'short', month:'short', day:'numeric' });
     const times = hits.length ? hits.map(fmtTime).join(', ') : 'No hits';
     return `
-      <div class="history-row" onclick="openDay('${p.entry_date}','history')">
+      <div class="history-row" onclick="openDay('${d}','history')">
         <div class="history-top">
-          <span class="history-date">${dateLabel}</span>
-          <span class="badge-sm ${issues.compliant?'ok':'over'}">${issues.compliant ? 'On plan' : 'Off plan'}</span>
+          <span class="history-date">${fmtDateShort(d)} · Phase ${entry.phaseObj.phase}${entry.attempt>1?' (attempt '+entry.attempt+')':''}</span>
+          <span class="history-tags">
+            <span class="badge-sm ${entry.issues.compliant?'ok':'over'}">${entry.issues.compliant ? 'On plan' : 'Slip'}</span>
+          </span>
         </div>
         <div class="history-times">${times}</div>
         ${row.notes ? `<div class="history-notes">${row.notes}</div>` : ''}
@@ -565,19 +604,16 @@ function renderHistory(){
   content.innerHTML = `<div class="card">${rowsHtml}</div>`;
 }
 
-window.openDay = function(entry_date, backTab){
+window.openDay = async function(entry_date, backTab){
+  const schedule = simulatePlan(rows);
+  let entry = schedule.byDate[entry_date];
+  if(!entry) return;
+  await ensureRow(entry.dateStr, entry);
   dayViewDate = entry_date;
+  dayViewBackTab = backTab;
   activeTab = 'day';
-  document.getElementById('content').innerHTML = renderDayCard(PLAN_BY_DATE[entry_date], { showBack:true, backTab });
+  document.getElementById('content').innerHTML = renderDayCard(entry, { showBack:true, backTab });
 };
-
-function renderDayView(entry_date){
-  document.getElementById('content').innerHTML = renderDayCard(PLAN_BY_DATE[entry_date], { showBack:true, backTab:'month' });
-}
-
-function renderPlan(){
-  document.getElementById('content').innerHTML = renderPhaseLegend();
-}
 
 window.goTab = function(tab){
   activeTab = tab;
@@ -609,18 +645,16 @@ document.getElementById('themeBtn').addEventListener('click', () => {
 async function init(){
   document.getElementById('content').innerHTML = `<div class="card empty-state"><div class="display">Loading...</div></div>`;
   try{
-    const existing = await fetchAll();
-    await seedMissing(existing);
     const all = await fetchAll();
     rows = Object.fromEntries(all.map(r => [r.entry_date, r]));
   }catch(e){
     document.getElementById('content').innerHTML = `<div class="card empty-state"><div class="display">Connection error</div><div>${e.message}</div></div>`;
     return;
   }
-  const info = todayInfo();
-  const phaseNow = info.planDay ? phaseForDay(info.planDay.day_number).phase : (info.state==='after' ? 4 : 1);
+  const schedule = simulatePlan(rows);
+  const phaseNow = schedule.planComplete ? 4 : schedule.byDate[schedule.currentDate].phaseObj.phase;
   document.getElementById('leafIcon').innerHTML = leafSVG(phaseNow);
-  renderToday();
+  await renderToday();
 }
 init();
 </script>
